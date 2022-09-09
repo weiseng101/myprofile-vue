@@ -25,10 +25,6 @@ const router = createRouter({
             component: testView
         },
         {
-            path: '/p/:productName',
-            component: productView
-        },
-        {
             path: '/test/:thetime',
             name: 'testView',
             component: testView
