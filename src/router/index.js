@@ -9,6 +9,7 @@ import productView from "@/views/productView";
 import HomePage from "@/views/HomePage";
 import randomView from "@/views/randomView";
 import md5View from "@/views/md5View";
+import todoView from "@/views/todoView";
 
 
 const router = createRouter({
@@ -33,6 +34,11 @@ const router = createRouter({
             path: '/date',
             name: 'date',
             component: dayView
+        },
+        {
+            path: '/todo',
+            name: 'todo',
+            component: todoView
         },
         {
             path: '/random',
