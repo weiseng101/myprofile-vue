@@ -2,11 +2,13 @@
   <HeaderLayout/>
 
   <section class="todo-section">
-    <h1>ToDo List</h1>
+    <h1>ToDo List:</h1>
 
     <div class="todo-listings">
       <div v-for="(item,index)  of  lists" class="" :key="index">
-        <p >{{item.title}}</p>
+        <p><span>{{ item.title }}</span>
+          <a-button class="remove-btn" @click="removeItem(index)">X Remove</a-button>
+        </p>
       </div>
     </div>
 
@@ -25,7 +27,7 @@
       </a-input>
       <br/>
       <br/>
-      <a-textarea v-model:value="todoDesc" placeholder="Desc" :row="4"/>
+      <!--      <a-textarea v-model:value="todoDesc" placeholder="Desc" :row="4"/>-->
 
 
       <a-button @click="addItem">Add</a-button>
@@ -60,37 +62,47 @@ export default defineComponent({
     // const rand= Math.random(0,1111111);
 
     const getLists = localStorage.getItem(keyItem);
-    let lists = [];
+    const lists = ref([]);
     console.log(getLists);
-    if(!getLists || getLists == null){
-      lists = [];
-    }else{
-      lists = JSON.parse(getLists);
+    if (!getLists || getLists == null) {
+      lists.value = [];
+    } else {
+      lists.value = JSON.parse(getLists);
     }
 
+    const removeItem = (ind) => {
+      lists.value.splice(ind, 1);
 
+      localStorage.setItem(keyItem, JSON.stringify(lists.value));
+
+      alert("item Removed");
+
+    }
 
     const addItem = () => {
       console.log(lists);
 
-      const item= {
-        "title" : todoTitle.value,
+      const item = {
+        "title": todoTitle.value,
         "desc": todoDesc.value
       }
-      lists.push(item);
-      localStorage.setItem(keyItem, JSON.stringify(lists));
+      lists.value.push(item);
+      localStorage.setItem(keyItem, JSON.stringify(lists.value));
 
       alert("item Added");
+
+      todoDesc.value = '';
+      todoTitle.value = '';
+
     }
-
-
 
 
     return {
       todoTitle,
       todoDesc,
       addItem,
-      lists
+      lists,
+      removeItem
     };
   }
 });
@@ -101,6 +113,31 @@ export default defineComponent({
 .add-todo-list {
   width: 50%;
   margin: 0 auto;
+}
+
+.todo-section {
+  background: rgba(121, 244, 122, 0.4);
+  display: block;
+  height: calc(100vh - 60px);
+  width: calc(100vw);
+}
+
+.todo-listings {
+  width: 50%;
+  margin: 0 auto;
+
+  p {
+    font-size: 18px;
+    text-align: left;
+
+    display: flex;
+    justify-content: flex-start;
+
+  }
+
+  .remove-btn {
+    margin-left: 10px;
+  }
 }
 
 </style>
