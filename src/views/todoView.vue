@@ -28,7 +28,7 @@
       <br/>
       <br/>
       <!--      <a-textarea v-model:value="todoDesc" placeholder="Desc" :row="4"/>-->
-
+      <SlidersOutlined style="font-size:30px;" />
 
       <a-button @click="addItem">Add</a-button>
     </div>
@@ -42,15 +42,19 @@
 import {Slide} from "vue3-burger-menu";
 import {ref, defineComponent} from "vue";
 import {useRouter} from "vue-router";
-import {ZhihuCircleFilled} from "@ant-design/icons-vue";
+import {SlidersOutlined} from "@ant-design/icons-vue";
 import HeaderLayout from "@/components/headerLayout";
 import localStorage from "localStorage";
+import { useToast } from "vue-toastification";
+
+
 
 
 export default defineComponent({
   name: "todoView.vue",
   components: {
-    HeaderLayout
+    HeaderLayout,
+    SlidersOutlined
   },
   setup() {
     const keyItem = 'todoList';
@@ -58,6 +62,9 @@ export default defineComponent({
 
     const todoTitle = ref('');
     const todoDesc = ref('');
+
+    const toast = useToast();
+
 
     // const rand= Math.random(0,1111111);
 
@@ -75,7 +82,7 @@ export default defineComponent({
 
       localStorage.setItem(keyItem, JSON.stringify(lists.value));
 
-      alert("item Removed");
+      toast.success("Item Removed!", { timeout: 2000});
 
     }
 
@@ -89,7 +96,10 @@ export default defineComponent({
       lists.value.push(item);
       localStorage.setItem(keyItem, JSON.stringify(lists.value));
 
-      alert("item Added");
+
+      // or with options
+      toast.success("Item Added!", { timeout: 2000});
+
 
       todoDesc.value = '';
       todoTitle.value = '';
@@ -102,7 +112,8 @@ export default defineComponent({
       todoDesc,
       addItem,
       lists,
-      removeItem
+      removeItem,
+      toast
     };
   }
 });
