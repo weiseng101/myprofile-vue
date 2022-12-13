@@ -43,6 +43,8 @@ import {ZhihuCircleFilled} from "@ant-design/icons-vue";
 import {Slide} from "vue3-burger-menu";
 import {ref, defineComponent} from "vue";
 import { useRouter } from "vue-router";
+// import {useI} from "@ionic/vue"
+
 
 export default defineComponent({
   name: 'HeaderLayout',

@@ -43,7 +43,8 @@ const router = createRouter({
         {
             path: '/random',
             name: 'random',
-            component: randomView
+            component: randomView,
+            meta: { transition: 'slide-left' },
         },
         {
             path: '/md5',

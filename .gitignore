@@ -27,3 +27,5 @@ pnpm-debug.log*
 *.zip
 
 /.idea
+package-lock.json
+/android

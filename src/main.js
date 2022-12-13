@@ -5,6 +5,7 @@ import router from "./router";
 import AOS from "aos";
 
 import Antd from 'ant-design-vue';
+import VAnimateCss from 'v-animate-css';
 
 
 import Toast from "vue-toastification";
@@ -30,6 +31,7 @@ app.use(router)
     .use(AOS.init())
     .use(i18n)
     .use(Toast)
+    .use(VAnimateCss)
 
 
 app.mount('#app')
